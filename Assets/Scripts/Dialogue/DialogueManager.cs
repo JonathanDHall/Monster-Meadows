@@ -17,6 +17,8 @@ public class DialogueManager : MonoBehaviour
 	void Start()
 	{
 		sentences = new Queue<string>();
+		if (Collection._instance.NPCNames.Contains(_manager.Name))
+			nameText.text = _manager.Name;
 	}
 
     private void OnEnable()
@@ -35,7 +37,7 @@ public class DialogueManager : MonoBehaviour
 		_continueButton.SetActive(true);
 		_choices.SetActive(false);
 
-		if (_manager.IsNameKnown)
+		if (Collection._instance.NPCNames.Contains(_manager.Name))
 			nameText.text = _manager.Name;
 
 		sentences.Clear();
@@ -52,7 +54,7 @@ public class DialogueManager : MonoBehaviour
 	{
 		if (sentences.Count == 0)
 		{
-			if (_manager.IsNameKnown)
+			if (Collection._instance.NPCNames.Contains(_manager.Name))
 				nameText.text = _manager.Name;
 			EndDialogue();
 			return;

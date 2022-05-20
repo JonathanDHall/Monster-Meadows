@@ -6,8 +6,6 @@ public class NPCManager : MonoBehaviour
     [SerializeField] private GameObject _interactUI;
 
     [SerializeField] private string _name;
-    private bool _isNameKnown;
-    public bool IsNameKnown { get => _isNameKnown; set => _isNameKnown = value; }
     public string Name { get => _name; set => _name = value; }
 
     private void OnTriggerEnter(Collider other)
@@ -41,6 +39,6 @@ public class NPCManager : MonoBehaviour
 
     public void LearnName()
     {
-        IsNameKnown = true;
+        Collection._instance.NPCNames.Add(Name);
     }
 }

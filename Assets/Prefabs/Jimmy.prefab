@@ -1204,6 +1204,7 @@ GameObject:
   - component: {fileID: 1774352840422334948}
   - component: {fileID: 1774352840422334947}
   - component: {fileID: 4246542869420213647}
+  - component: {fileID: 2667443781839111123}
   m_Layer: 5
   m_Name: Jimmy
   m_TagString: Untagged
@@ -1306,6 +1307,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b31197e58193f489ec9ad789d3ae25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2667443781839111123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774352840422334946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0461c29d4b84c78479ee656a5bf9abb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _questName: Find Puppy's Toy!
 --- !u!1 &1774352840679807787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,6 +1539,18 @@ MonoBehaviour:
       - m_Target: {fileID: 7751471132384891595}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2667443781839111123}
+        m_TargetAssemblyTypeName: QuestGiver, Assembly-CSharp
+        m_MethodName: StartQuest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2087,10 +2113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167c2ff3e71f494409b9630ac72f4287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
   _dialogueBox: {fileID: 1774352840422334946}
-  _name: Jimmy
   _interactUI: {fileID: 9180597965449552955}
+  _name: Jimmy
 --- !u!135 &1967039813440136763
 SphereCollider:
   m_ObjectHideFlags: 0
