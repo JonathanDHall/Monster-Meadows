@@ -2,11 +2,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Toggle _fullscreenToggle;
     [SerializeField] private TMP_Dropdown _quality;
+    [SerializeField] private Button _loadButton;
+    [SerializeField] private GameObject _saveSuccesful;
 
     private void Awake()
     {
@@ -16,6 +19,11 @@ public class MainMenu : MonoBehaviour
         {
             _quality.value = PlayerPrefs.GetInt("_quality");
             QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("_quality"));
+        }
+        if (_loadButton != null)
+        {
+            if (SaveSystem.SaveExists("Scene"))
+                _loadButton.interactable = true;
         }
     }
 
@@ -50,9 +58,38 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("_quality", qualityIndex);
     }
 
+
+    bool isSaving;
     public void Save()
     {
+        if (!isSaving)
+            StartCoroutine(SaveProcess());
+    }
+
+    IEnumerator SaveProcess()
+    {
+        isSaving = true;
+        _saveSuccesful.SetActive(false);
+        if (SaveSystem.SaveExists("SaveSuccessful"))
+            SaveSystem.DeleteSingleFile("SaveSuccessful");
+        yield return new WaitForEndOfFrame();
+        SaveSystem.Save<int>(1, "SaveSuccessful");
         GameEvents.SaveInitiated();
+
+        while (!SaveSystem.SaveExists("SaveSuccessful"))
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        isSaving = false;
+        _saveSuccesful.SetActive(true);
+    }
+
+    public void NewGame(string level)
+    {
+        Collection._instance.Clear();
+        SaveSystem.SeriouslyDeleteAllSaveFiles();
+        SceneManager.LoadScene(level);
     }
 
     public void Load()

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController controller;
     private float _speed = 6f;
+    private float _sprintMulti = 1;
     private float gravity = -19.62f;
     private float jumpHeight = 2;
 
@@ -40,6 +41,11 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
+            if (Input.GetButton("Fire3"))
+                _sprintMulti = 2f;
+            else
+                _sprintMulti = 1f;
+
             velocity.y = -2;
         }
 
@@ -54,7 +60,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * _speed * Time.deltaTime);
+            controller.Move(moveDir.normalized * _speed * _sprintMulti * Time.deltaTime);
 
             anim.SetBool("IsRunning", true);
         }
@@ -65,6 +71,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            _sprintMulti = 1f;
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
             //anim.SetTrigger("Jump");
         }

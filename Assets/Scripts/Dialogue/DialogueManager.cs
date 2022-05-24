@@ -13,18 +13,32 @@ public class DialogueManager : MonoBehaviour
 	[SerializeField] private GameObject _continueButton;
 	[SerializeField] private GameObject _choices;
 	[SerializeField] private NPCManager _manager;
+	private DialogueChoice[] dialogueChoices;
 
 	void Start()
 	{
 		sentences = new Queue<string>();
-		if (Collection._instance.NPCNames.Contains(_manager.Name))
+		if (_manager.CharacterInfo.Contains(_manager.Name))
 			nameText.text = _manager.Name;
 	}
 
-    private void OnEnable()
+	private void OnEnable()
     {
+		if (_manager.CharacterInfo.Contains(_manager.Name))
+			nameText.text = _manager.Name;
+
+		if (dialogueChoices == null)
+        {
+			dialogueChoices = _choices.GetComponentsInChildren<DialogueChoice>();
+		}
+
 		PlayerController._instance.DisableControls();
 		animator.SetBool("IsOpen", true);
+
+		foreach (var item in dialogueChoices)
+		{
+			item.gameObject.SetActive(true);
+		}
 	}
 
     private void OnDisable()
@@ -37,7 +51,7 @@ public class DialogueManager : MonoBehaviour
 		_continueButton.SetActive(true);
 		_choices.SetActive(false);
 
-		if (Collection._instance.NPCNames.Contains(_manager.Name))
+		if (_manager.CharacterInfo.Contains(_manager.Name))
 			nameText.text = _manager.Name;
 
 		sentences.Clear();
@@ -54,7 +68,7 @@ public class DialogueManager : MonoBehaviour
 	{
 		if (sentences.Count == 0)
 		{
-			if (Collection._instance.NPCNames.Contains(_manager.Name))
+			if (_manager.CharacterInfo.Contains(_manager.Name))
 				nameText.text = _manager.Name;
 			EndDialogue();
 			return;
@@ -77,6 +91,10 @@ public class DialogueManager : MonoBehaviour
 
 	void EndDialogue()
 	{
+		foreach (var item in dialogueChoices)
+		{
+			item.gameObject.SetActive(true);
+		}
 		_continueButton.SetActive(false);
 		_choices.SetActive(true);
 	}

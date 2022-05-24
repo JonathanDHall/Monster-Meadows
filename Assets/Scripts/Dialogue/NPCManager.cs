@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCManager : MonoBehaviour
@@ -7,6 +8,30 @@ public class NPCManager : MonoBehaviour
 
     [SerializeField] private string _name;
     public string Name { get => _name; set => _name = value; }
+
+    public HashSet<string> CharacterInfo { get; private set; } = new HashSet<string>();
+    public int _relationshipLevel = 0;
+
+    private void Awake()
+    {
+        GameEvents.SaveInitiated += Save;
+        GameEvents.LoadInitiated += Load;
+        Load();
+    }
+
+    void Save()
+    {
+        SaveSystem.Save(CharacterInfo, Name);
+        SaveSystem.Save(_relationshipLevel, Name + "RelationshipLevl");
+    }
+
+    void Load()
+    {
+        if (SaveSystem.SaveExists(Name))
+            CharacterInfo = SaveSystem.Load<HashSet<string>>(Name);
+        if (SaveSystem.SaveExists(Name + "RelationshipLevl"))
+            _relationshipLevel = SaveSystem.Load<int>(Name + "RelationshipLevl");
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -39,6 +64,11 @@ public class NPCManager : MonoBehaviour
 
     public void LearnName()
     {
-        Collection._instance.NPCNames.Add(Name);
+        CharacterInfo.Add(Name);
+    }
+
+    public void ImproveRelationshipLevel()
+    {
+        _relationshipLevel++;
     }
 }

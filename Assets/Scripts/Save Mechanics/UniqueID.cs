@@ -8,8 +8,7 @@ public class UniqueID : MonoBehaviour
     public string ItemID { get; set; }
 
     private Collection _collection;
-    [SerializeField] private bool _autoAddToTrash;
-    [SerializeField] private bool _ignoreDestroyOnLoad;
+    [SerializeField] private bool _destroyOnLoad;
     [SerializeField] private bool _customID;
     [SerializeField] private string CustomID;
 
@@ -26,17 +25,14 @@ public class UniqueID : MonoBehaviour
     {
         _collection = Collection._instance;
 
-        if (!_ignoreDestroyOnLoad)
+        if (_destroyOnLoad)
         {
             if (_collection.Trash.Contains(ID))
             {
-                this.gameObject.SetActive(false);
-                //Destroy(this.gameObject);
+                Destroy(this.gameObject);
                 return;
             }
         }
-        if (_autoAddToTrash)
-            AddToTrash(false);
     }
 
     public void AddToTrash(bool delay)

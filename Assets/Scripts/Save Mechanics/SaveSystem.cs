@@ -34,6 +34,12 @@ public class SaveSystem : MonoBehaviour
         return File.Exists(path);
     }
 
+    public static void DeleteSingleFile (string key)
+    {
+        string path = Application.persistentDataPath + "/saves/" + key + ".txt";
+        File.Delete(path);
+    }
+
     public static void SeriouslyDeleteAllSaveFiles()
     {
         string path = Application.persistentDataPath + "/saves/";
