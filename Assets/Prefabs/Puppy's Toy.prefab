@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5123341283710207770}
   - component: {fileID: 5123341283710207765}
   - component: {fileID: 4478769373199534225}
+  - component: {fileID: 498495082238435761}
   m_Layer: 0
   m_Name: Puppy's Toy
   m_TagString: Untagged
@@ -113,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyOnLoad: 1
-  ItemName: Puppy's Toy
+  ItemName: {fileID: 11400000, guid: 6e10b974705832a46aaf971f0d757031, type: 2}
 --- !u!114 &4478769373199534225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +128,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateAmount: {x: 0, y: 100, z: 0}
+--- !u!114 &498495082238435761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465305139326302790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60523db19c53f6e4f970e55c0b84f2bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referenceItem: {fileID: 11400000, guid: 6e10b974705832a46aaf971f0d757031, type: 2}
 --- !u!1 &7676767938409952108
 GameObject:
   m_ObjectHideFlags: 0

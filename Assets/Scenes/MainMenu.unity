@@ -1523,6 +1523,7 @@ MonoBehaviour:
   _fullscreenToggle: {fileID: 1067138238}
   _quality: {fileID: 1726998609}
   _loadButton: {fileID: 2052292020}
+  _saveSuccesful: {fileID: 0}
 --- !u!114 &362856946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2162,6 +2163,7 @@ GameObject:
   - component: {fileID: 585217119}
   - component: {fileID: 585217118}
   - component: {fileID: 585217117}
+  - component: {fileID: 585217120}
   m_Layer: 0
   m_Name: Gamemanager
   m_TagString: Untagged
@@ -2182,6 +2184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scene: 
+  _SendUpdate: 0
 --- !u!114 &585217118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2209,6 +2212,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &585217120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585217116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be9815f4e754c147bebcd449449220d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &644467959
 GameObject:
   m_ObjectHideFlags: 0

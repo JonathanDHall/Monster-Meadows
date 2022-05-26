@@ -3,6 +3,7 @@ using UnityEngine;
 public class QuestGiver : MonoBehaviour
 {
     [SerializeField] private string _questName;
+    [SerializeField] private InventoryItemData _questObject;
 
     public void StartQuest()
     {
@@ -11,6 +12,7 @@ public class QuestGiver : MonoBehaviour
 
     public void CompleteQuest()
     {
+        InventorySystem._instance.Remove(_questObject);
         Collection._instance.UpdateQuestLog(_questName, true);
     }
 }

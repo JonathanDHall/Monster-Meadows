@@ -331,7 +331,7 @@ MonoBehaviour:
   _alreadyKnownQuest: 0
   _knownQuest: 
   _requiresQuestItem: 0
-  _questItem: 
+  _questItem: {fileID: 0}
   _questNotCompleted: 0
   _completedQuest: 
   _requiresMinimumRelationship: 0
@@ -715,7 +715,7 @@ MonoBehaviour:
   _alreadyKnownQuest: 0
   _knownQuest: 
   _requiresQuestItem: 0
-  _questItem: 
+  _questItem: {fileID: 0}
   _questNotCompleted: 0
   _completedQuest: 
   _requiresMinimumRelationship: 0
@@ -1338,6 +1338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _questName: Find Puppy's Toy!
+  _questObject: {fileID: 11400000, guid: 6e10b974705832a46aaf971f0d757031, type: 2}
 --- !u!1 &1774352840679807787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1633,7 +1634,7 @@ MonoBehaviour:
   _alreadyKnownQuest: 1
   _knownQuest: Find Puppy's Toy!
   _requiresQuestItem: 0
-  _questItem: 
+  _questItem: {fileID: 0}
   _questNotCompleted: 1
   _completedQuest: Find Puppy's Toy!
   _requiresMinimumRelationship: 0
@@ -2880,7 +2881,7 @@ MonoBehaviour:
   _alreadyKnownQuest: 0
   _knownQuest: 
   _requiresQuestItem: 0
-  _questItem: 
+  _questItem: {fileID: 0}
   _questNotCompleted: 0
   _completedQuest: 
   _requiresMinimumRelationship: 1
@@ -3284,7 +3285,7 @@ MonoBehaviour:
   _alreadyKnownQuest: 0
   _knownQuest: 
   _requiresQuestItem: 1
-  _questItem: Puppy's Toy
+  _questItem: {fileID: 11400000, guid: 6e10b974705832a46aaf971f0d757031, type: 2}
   _questNotCompleted: 0
   _completedQuest: 
   _requiresMinimumRelationship: 0

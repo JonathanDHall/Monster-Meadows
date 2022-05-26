@@ -6,25 +6,28 @@ public class CropGrowth : MonoBehaviour
 
     [Header("Crop Details")]
     [SerializeField] private string _cropName;
+    [SerializeField] public int _seedTypeInt;
     [SerializeField] private int _harvestAmount;
 
     [Header("Phase Details")]
-    private int _curPhase;
+    public int _curPhase;
     [SerializeField] private int _daysBetweenPhases;
-    private int _dayCount;
+    public int _dayCount;
     [SerializeField] private GameObject[] _phases;
-    private bool _isGrowning = true;
+    public bool _isGrowning = true;
     [SerializeField] private GameObject _interactUI;
 
     [Header("Watering Details")]
-    private bool _isWatered;
+    public bool _isWatered;
     [SerializeField] private GameObject _interactUIWater;
 
+    public string ID { get; private set; }
 
     void Start()
     {
         GameEvents.NewDay += Grow;
         _manager = GetComponentInParent<CropPlot>();
+        ID = _manager.ID;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,6 +55,7 @@ public class CropGrowth : MonoBehaviour
                     StringPopUp.Create("Harvested " + _harvestAmount.ToString() + "X " + _cropName + "!");
 
                     Destroy(gameObject);
+                    _manager.Save();
                 }
             }
         }
@@ -68,6 +72,7 @@ public class CropGrowth : MonoBehaviour
 
                     _isWatered = true;
                     _manager.WaterDirt(_isWatered);
+                    _manager.Save();
                 }
             }
         }
@@ -103,6 +108,23 @@ public class CropGrowth : MonoBehaviour
         _manager.WaterDirt(_isWatered);
 
         if (_curPhase + 1 >= _phases.Length)
+        {
+            _isWatered = true;
             _isGrowning = false;
+        }
+
+        _manager.Save();
+    }
+
+    public void SetUp(Collection.CropData data)
+    {
+        _manager = GetComponentInParent<CropPlot>();
+        _curPhase = data.m_curPhase;
+        _dayCount = data.m_dayCount;
+        _isGrowning = data.m_isGrowningg;
+        _isWatered = data.m_isWatered;
+
+        _phases[0].SetActive(false);
+        _phases[_curPhase].SetActive(true);
     }
 }

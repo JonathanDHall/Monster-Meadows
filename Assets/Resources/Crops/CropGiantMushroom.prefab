@@ -51,13 +51,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cropName: Giant Mushroom
+  _seedTypeInt: 0
   _harvestAmount: 3
-  _daysBetweenPhases: 2
+  _curPhase: 0
+  _daysBetweenPhases: 1
+  _dayCount: 0
   _phases:
   - {fileID: 4293148223579618488}
   - {fileID: 4293148223065430675}
   - {fileID: 4293148224755323046}
+  _isGrowning: 1
   _interactUI: {fileID: 4293148223036611634}
+  _isWatered: 0
   _interactUIWater: {fileID: 4293148223920747844}
 --- !u!135 &4293148223034722230
 SphereCollider:

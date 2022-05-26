@@ -23,10 +23,28 @@ public class DayNightCycle : MonoBehaviour
     public AnimationCurve lightingIntensityMultiplyer;
     public AnimationCurve reflectionIntensityMultiplyer;
 
+    private void Awake()
+    {
+        GameEvents.SaveInitiated += Save;
+        //.LoadInitiated += Load;
+        Load();
+    }
+
     private void Start()
     {
         timeRate = 1.0f / fullDayLength;
         time = startTime;
+    }
+
+    void Save()
+    {
+        SaveSystem.Save(time, "DayNightCycle");
+    }
+
+    void Load()
+    {
+        if (SaveSystem.SaveExists("DayNightCycle"))
+            startTime = SaveSystem.Load<float>("DayNightCycle");
     }
 
     private void Update()

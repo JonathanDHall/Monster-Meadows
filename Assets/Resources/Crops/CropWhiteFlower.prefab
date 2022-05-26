@@ -10853,13 +10853,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cropName: White Flower
+  _seedTypeInt: 1
   _harvestAmount: 9
-  _daysBetweenPhases: 3
+  _curPhase: 0
+  _daysBetweenPhases: 1
+  _dayCount: 0
   _phases:
   - {fileID: 6829934994311662750}
   - {fileID: 6829934994858781365}
   - {fileID: 6829934993336754304}
+  _isGrowning: 1
   _interactUI: {fileID: 6829934994837302292}
+  _isWatered: 0
   _interactUIWater: {fileID: 6829934993433560418}
 --- !u!135 &6829934994839746448
 SphereCollider:

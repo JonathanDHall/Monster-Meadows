@@ -16,7 +16,7 @@ public class DialogueChoice : MonoBehaviour
     [SerializeField] private string _knownQuest;
 
     [SerializeField] private bool _requiresQuestItem;
-    [SerializeField] private string _questItem;
+    [SerializeField] private InventoryItemData _questItem;
 
     [SerializeField] private bool _questNotCompleted;
     [SerializeField] private string _completedQuest;
@@ -54,7 +54,7 @@ public class DialogueChoice : MonoBehaviour
 
         if (_requiresQuestItem)
         {
-            if (!Collection._instance.QuestItems.Contains(_questItem))
+            if (!InventorySystem._instance.CheckIfInventoryContains(_questItem))
                 gameObject.SetActive(false);
         }
 

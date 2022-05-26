@@ -14,9 +14,90 @@ public class CropPlot : MonoBehaviour
     [SerializeField] private Renderer _dirt;
     [SerializeField] private Material _dryDirt;
     [SerializeField] private Material _wateredDirt;
-    
+
+    public string ID { get; private set; }
+
+    private void Awake()
+    {
+        ID = transform.position.sqrMagnitude + "_" + transform.rotation.eulerAngles.sqrMagnitude;
+        GameEvents.SaveInitiated += Save;
+        //GameEvents.LoadInitiated += Load;
+    }
+
+    private void Start()
+    {
+        Load();
+    }
+
+    public void Save()
+    {
+        if (_CurPlant != null)
+        {
+            Collection.CropData cropData = new Collection.CropData();
+            var data = _CurPlant.GetComponent<CropGrowth>();
+            cropData.ID = ID;
+            cropData.m_curPhase = data._curPhase;
+            cropData.m_dayCount = data._dayCount;
+            cropData.m_isGrowningg = data._isGrowning;
+            cropData.m_isWatered = data._isWatered;
+            cropData.m_seedTypeInt = data._seedTypeInt;
+
+            for (int i = 0; i < Collection._instance.CropList.Count; i++)
+            {
+                if (Collection._instance.CropList[i].ID == ID)
+                {
+                    Collection._instance.CropList.Remove(Collection._instance.CropList[i]);
+                }
+            }
+
+            Collection._instance.CropList.Add(cropData);
+            //SaveSystem.Save(_CurPlant.GetComponent<CropGrowth>(), ID);
+        }
+        else
+        {
+            for (int i = 0; i < Collection._instance.CropList.Count; i++)
+            {
+                if (Collection._instance.CropList[i].ID == ID)
+                {
+                    Collection._instance.CropList.Remove(Collection._instance.CropList[i]);
+                }
+            }
+        }
+    }
+
+    void Load()
+    {
+        foreach (var item in Collection._instance.CropList)
+        {
+            if (item.ID == ID)
+            {
+                _typeToPlant = (SeedType)item.m_seedTypeInt;
+                var newPlant = Instantiate(Resources.Load("Crops/" + _typeToPlant.ToString()), _plantSpawnPoint.transform);
+                _CurPlant = (GameObject)newPlant;
+                var plantCropGrowth = _CurPlant.GetComponent<CropGrowth>();
+                WaterDirt(item.m_isWatered);
+
+                plantCropGrowth.SetUp(item);
+            }
+        }
+
+        //if (SaveSystem.SaveExists(ID))
+        //{
+        //    CropGrowth baseValues = SaveSystem.Load<CropGrowth>(ID);
+        //    SetSeed(baseValues._seedTypeInt);
+        //    var newPlant = Instantiate(Resources.Load("Crops/" + _typeToPlant.ToString()), _plantSpawnPoint.transform);
+        //    _CurPlant = (GameObject)newPlant;
+        //    var plantCropGrowth = _CurPlant.GetComponent<CropGrowth>();
+
+        //    plantCropGrowth.SetUp(baseValues);
+        //}
+    }
+
     public void WaterDirt(bool _water)
     {
+        if (_dirt == null)
+            _dirt = GetComponentInChildren<MeshRenderer>();
+
         switch (_water)
         {
             case true:

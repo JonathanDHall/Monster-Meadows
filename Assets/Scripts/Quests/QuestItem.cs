@@ -4,7 +4,7 @@ public class QuestItem : MonoBehaviour
 {
     private Collection _collection;
     [SerializeField] private bool _destroyOnLoad;
-    [SerializeField] private string ItemName;
+    [SerializeField] private InventoryItemData ItemName;
 
     void Start()
     {
@@ -12,7 +12,7 @@ public class QuestItem : MonoBehaviour
 
         if (_destroyOnLoad)
         {
-            if (_collection.QuestItems.Contains(ItemName))
+            if (InventorySystem._instance.CheckIfInventoryContains(ItemName))
             {
                 gameObject.SetActive(false);
                 //Destroy(this.gameObject);
@@ -25,14 +25,15 @@ public class QuestItem : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
+            GetComponent<ItemObject>().OnHandlePickUpItem();
             AddToQuestItem();
         }
     }
 
     public void AddToQuestItem(bool delay = false)
     {
-        StringPopUp.Create(("Picked up " + ItemName + "!"));
-        _collection.QuestItems.Add(ItemName);
+        StringPopUp.Create(("Picked up " + ItemName.displayName + "!"));
+        //InventorySystem._instance.Add(ItemName);
         if (delay)
             Invoke("DelayDestroy", 1);
         else
