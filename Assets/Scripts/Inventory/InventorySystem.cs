@@ -49,7 +49,6 @@ public class InventorySystem : MonoBehaviour
                 newData.id = item.id;
                 newData.displayName = item.displayName;
                 newData.name = item.id;
-                //InventoryItem newItem = new InventoryItem(newData, item.stackSize);
 
                 Add(newData, item.stackSize);
             }

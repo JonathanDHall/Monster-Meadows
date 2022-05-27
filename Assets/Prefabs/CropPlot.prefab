@@ -1247,7 +1247,7 @@ GameObject:
   - component: {fileID: 3555635992614445740}
   - component: {fileID: 3555635992614445739}
   - component: {fileID: 8102838761615512865}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CropPlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1352,6 +1352,7 @@ MonoBehaviour:
   _plantSpawnPoint: {fileID: 3555635992199884752}
   _typeToPlant: 0
   _interactUI: {fileID: 6664719049594111322}
+  _CurPlant: {fileID: 0}
   _plantSelectUI: {fileID: 2863964161096010246}
   _dirt: {fileID: 3555635992249507617}
   _dryDirt: {fileID: 2100000, guid: 81f536a15f5f3cf448802f367db2df52, type: 2}
@@ -1367,7 +1368,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 1
   m_Center: {x: -0.0000005364418, y: -0.124537975, z: 0}
 --- !u!1 &4233813839960024791
 GameObject:

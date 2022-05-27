@@ -7,8 +7,8 @@ public class CropPlot : MonoBehaviour
     public enum SeedType { CropGiantMushroom, CropWhiteFlower, }
     public SeedType _typeToPlant;
     [SerializeField] private GameObject _interactUI;
-    private GameObject _CurPlant;
-    [SerializeField] private GameObject _plantSelectUI;
+    public GameObject _CurPlant;
+    [SerializeField] public GameObject _plantSelectUI;
 
     [Header("Dirt")]
     [SerializeField] private Renderer _dirt;
@@ -21,7 +21,6 @@ public class CropPlot : MonoBehaviour
     {
         ID = transform.position.sqrMagnitude + "_" + transform.rotation.eulerAngles.sqrMagnitude;
         GameEvents.SaveInitiated += Save;
-        //GameEvents.LoadInitiated += Load;
     }
 
     private void Start()
@@ -51,7 +50,6 @@ public class CropPlot : MonoBehaviour
             }
 
             Collection._instance.CropList.Add(cropData);
-            //SaveSystem.Save(_CurPlant.GetComponent<CropGrowth>(), ID);
         }
         else
         {
@@ -80,17 +78,6 @@ public class CropPlot : MonoBehaviour
                 plantCropGrowth.SetUp(item);
             }
         }
-
-        //if (SaveSystem.SaveExists(ID))
-        //{
-        //    CropGrowth baseValues = SaveSystem.Load<CropGrowth>(ID);
-        //    SetSeed(baseValues._seedTypeInt);
-        //    var newPlant = Instantiate(Resources.Load("Crops/" + _typeToPlant.ToString()), _plantSpawnPoint.transform);
-        //    _CurPlant = (GameObject)newPlant;
-        //    var plantCropGrowth = _CurPlant.GetComponent<CropGrowth>();
-
-        //    plantCropGrowth.SetUp(baseValues);
-        //}
     }
 
     public void WaterDirt(bool _water)
@@ -121,40 +108,46 @@ public class CropPlot : MonoBehaviour
         _typeToPlant = (SeedType)seed;
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (!other.transform.CompareTag("Player"))
+    //        return;
+
+    //    if (_CurPlant == null)
+    //        _interactUI.SetActive(true);
+
+    //}
+
+    public void ActvatePlantingUI()
     {
-        if (!other.transform.CompareTag("Player"))
-            return;
-
-        if (_CurPlant == null)
-            _interactUI.SetActive(true);
-
+        _plantSelectUI.SetActive(true);
+        PlayerController._instance.DisableControls();
     }
 
-    private void Update()
-    {
-        if (_CurPlant == null)
-        {
-            if (_interactUI.activeInHierarchy)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    _interactUI.SetActive(false);
-                    _plantSelectUI.SetActive(true);
-                    PlayerController._instance.DisableControls();
-                }
-            }
-        }
-    }
+    //private void Update()
+    //{
+    //    if (_CurPlant == null)
+    //    {
+    //        if (_interactUI.activeInHierarchy)
+    //        {
+    //            if (Input.GetKeyDown(KeyCode.E))
+    //            {
+    //                _interactUI.SetActive(false);
+    //                _plantSelectUI.SetActive(true);
+    //                PlayerController._instance.DisableControls();
+    //            }
+    //        }
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (!other.transform.CompareTag("Player"))
-            return;
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (!other.transform.CompareTag("Player"))
+    //        return;
 
-        if (_CurPlant == null)
-            _interactUI.SetActive(false);
-    }
+    //    if (_CurPlant == null)
+    //        _interactUI.SetActive(false);
+    //}
 
     public void OnExit()
     {

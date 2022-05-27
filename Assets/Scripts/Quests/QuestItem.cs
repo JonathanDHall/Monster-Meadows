@@ -4,7 +4,7 @@ public class QuestItem : MonoBehaviour
 {
     private Collection _collection;
     [SerializeField] private bool _destroyOnLoad;
-    [SerializeField] private InventoryItemData ItemName;
+    [SerializeField] public InventoryItemData ItemName;
 
     void Start()
     {
