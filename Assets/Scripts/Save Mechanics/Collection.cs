@@ -7,9 +7,7 @@ public class Collection : MonoBehaviour
     public static Collection _instance;
 
     public HashSet<string> QuestLog { get; private set; } = new HashSet<string>();
-    //public HashSet<string> QuestItems { get; private set; } = new HashSet<string>();
     public HashSet<string> CompletedQuests { get; private set; } = new HashSet<string>();
-
     public HashSet<string> Trash { get; private set; } = new HashSet<string>();
 
     [System.Serializable]
@@ -42,20 +40,15 @@ public class Collection : MonoBehaviour
 
     void Save()
     {
-        //SaveSystem.Save(QuestItems, "QuestItems");
         SaveSystem.Save(QuestLog, "QuestLog");
         SaveSystem.Save(CompletedQuests, "CompletedQuests");
         SaveSystem.Save(Trash, "Trash");
         SaveSystem.Save(CropList, "CropData");
-
         SaveSystem.Save(SceneManager.GetActiveScene().name, "Scene");
     }
 
     public void Load()
     {
-        //if (SaveSystem.SaveExists("QuestItems"))
-        //    QuestItems = SaveSystem.Load<HashSet<string>>("QuestItems");
-
         if (SaveSystem.SaveExists("Trash"))
             Trash = SaveSystem.Load<HashSet<string>>("Trash");
 
@@ -77,7 +70,6 @@ public class Collection : MonoBehaviour
 
     public void Clear()
     {
-        //QuestItems.Clear();
         Trash.Clear();
         CompletedQuests.Clear();
         CropList.Clear();
