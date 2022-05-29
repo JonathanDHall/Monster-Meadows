@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CropPlot : MonoBehaviour
 {
@@ -9,6 +11,9 @@ public class CropPlot : MonoBehaviour
     [SerializeField] private GameObject _interactUI;
     public GameObject _CurPlant;
     [SerializeField] public GameObject _plantSelectUI;
+    [SerializeField] private Button _plantButton;
+    [SerializeField] private InventoryItemData[] _seeds;
+    //private List<InventoryItem> _seedsItems { get; set; }
 
     [Header("Dirt")]
     [SerializeField] private Renderer _dirt;
@@ -26,6 +31,12 @@ public class CropPlot : MonoBehaviour
     private void Start()
     {
         Load();
+
+        //foreach (var item in _seeds)
+        //{
+        //    InventoryItem temp = new InventoryItem(item);
+        //    _seedsItems.Add(temp);
+        //}
     }
 
     public void Save()
@@ -80,6 +91,22 @@ public class CropPlot : MonoBehaviour
         }
     }
 
+    private void CheckIfHasSeed()
+    {
+        if (_CurPlant == null)
+        {
+            //Debug.LogError("No Plant");
+            if (InventorySystem._instance.CheckIfInventoryContains(_seeds[(int)_typeToPlant]))
+            {
+                //Debug.LogError(_seeds[(int)_typeToPlant].id);
+
+                _plantButton.interactable = true;
+            }
+            else
+                _plantButton.interactable = false;
+        }
+    }
+
     public void WaterDirt(bool _water)
     {
         if (_dirt == null)
@@ -99,6 +126,7 @@ public class CropPlot : MonoBehaviour
 
     public void SelectPlant()
     {
+        InventorySystem._instance.Remove(_seeds[(int)_typeToPlant]);
         var temp =  Instantiate(Resources.Load("Crops/" + _typeToPlant.ToString()), _plantSpawnPoint.transform);
         _CurPlant = (GameObject)temp;
     }
@@ -106,48 +134,15 @@ public class CropPlot : MonoBehaviour
     public void SetSeed(int seed)
     {
         _typeToPlant = (SeedType)seed;
+        CheckIfHasSeed();   
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (!other.transform.CompareTag("Player"))
-    //        return;
-
-    //    if (_CurPlant == null)
-    //        _interactUI.SetActive(true);
-
-    //}
 
     public void ActvatePlantingUI()
     {
         _plantSelectUI.SetActive(true);
         PlayerController._instance.DisableControls();
+        CheckIfHasSeed();
     }
-
-    //private void Update()
-    //{
-    //    if (_CurPlant == null)
-    //    {
-    //        if (_interactUI.activeInHierarchy)
-    //        {
-    //            if (Input.GetKeyDown(KeyCode.E))
-    //            {
-    //                _interactUI.SetActive(false);
-    //                _plantSelectUI.SetActive(true);
-    //                PlayerController._instance.DisableControls();
-    //            }
-    //        }
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (!other.transform.CompareTag("Player"))
-    //        return;
-
-    //    if (_CurPlant == null)
-    //        _interactUI.SetActive(false);
-    //}
 
     public void OnExit()
     {

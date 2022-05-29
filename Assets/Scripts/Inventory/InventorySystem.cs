@@ -12,6 +12,10 @@ public class InventorySystem : MonoBehaviour
 
     public List<Item> itemsToSave = new List<Item>();
 
+    public System.Action onInventoryChangedEvent;
+
+    [SerializeField] private GameObject _inventoryMenu;
+
     [System.Serializable]
     public struct Item
     {
@@ -68,6 +72,12 @@ public class InventorySystem : MonoBehaviour
         GameEvents.LoadInitiated += Load;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+            _inventoryMenu.SetActive(!_inventoryMenu.activeInHierarchy);
+    }
+
     public bool CheckIfInventoryContains(InventoryItemData reference)
     {
         foreach (var item in inventory)
@@ -96,6 +106,8 @@ public class InventorySystem : MonoBehaviour
             if (stackSize >= 2)
                 newItem.AddToStack(stackSize - 1);
         }
+
+        onInventoryChangedEvent?.Invoke();
     }
 
     public void Remove(InventoryItemData referenceData)
@@ -117,5 +129,7 @@ public class InventorySystem : MonoBehaviour
             inventory.Remove(newItem);
             itemDictionary.Remove(referenceData);
         }
+
+        onInventoryChangedEvent?.Invoke();
     }
 }

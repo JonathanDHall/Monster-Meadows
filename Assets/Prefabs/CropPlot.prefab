@@ -1354,6 +1354,10 @@ MonoBehaviour:
   _interactUI: {fileID: 6664719049594111322}
   _CurPlant: {fileID: 0}
   _plantSelectUI: {fileID: 2863964161096010246}
+  _plantButton: {fileID: 824465968446428965}
+  _seeds:
+  - {fileID: 11400000, guid: d9b685648f871114db482273024704bd, type: 2}
+  - {fileID: 11400000, guid: 89a4cc39051330f4d9d5bc7b091fef2f, type: 2}
   _dirt: {fileID: 3555635992249507617}
   _dryDirt: {fileID: 2100000, guid: 81f536a15f5f3cf448802f367db2df52, type: 2}
   _wateredDirt: {fileID: 2100000, guid: c475fcb6b65f0f146aefc91e2f45663c, type: 2}

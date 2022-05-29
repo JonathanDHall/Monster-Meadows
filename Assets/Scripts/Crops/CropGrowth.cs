@@ -30,66 +30,6 @@ public class CropGrowth : MonoBehaviour
         ID = _manager.ID;
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (!other.transform.CompareTag("Player"))
-    //        return;
-
-    //    if (!_isWatered && _isGrowning)
-    //        _interactUIWater.SetActive(true);
-
-    //    if (!_isGrowning)
-    //        _interactUI.SetActive(true);
-    //}
-
-    //private void Update()
-    //{
-    //    if (!_isGrowning)
-    //    {
-    //        if (_interactUI.activeInHierarchy)
-    //        {
-    //            if (Input.GetKeyDown(KeyCode.E))
-    //            {
-    //                _interactUI.SetActive(false);
-
-    //                StringPopUp.Create("Harvested " + _harvestAmount.ToString() + "X " + _cropName + "!");
-
-    //                Destroy(gameObject);
-    //                _manager.Save();
-    //            }
-    //        }
-    //    }
-
-    //    if (!_isWatered && _isGrowning) 
-    //    {
-    //        if (_interactUIWater.activeInHierarchy)
-    //        {
-    //            if (Input.GetKeyDown(KeyCode.E))
-    //            {
-    //                _interactUIWater.SetActive(false);
-
-    //                StringPopUp.Create("Watered " + _cropName + ".");
-
-    //                _isWatered = true;
-    //                _manager.WaterDirt(_isWatered);
-    //                _manager.Save();
-    //            }
-    //        }
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (!other.transform.CompareTag("Player"))
-    //        return;
-
-    //    if (!_isWatered && _isGrowning)
-    //        _interactUIWater.SetActive(false);
-
-    //    if (!_isGrowning)
-    //        _interactUI.SetActive(false);
-    //}
-
     public void WaterCrop()
     {
         StringPopUp.Create("Watered " + _cropName + ".");

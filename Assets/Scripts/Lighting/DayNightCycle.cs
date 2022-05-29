@@ -23,6 +23,15 @@ public class DayNightCycle : MonoBehaviour
     public AnimationCurve lightingIntensityMultiplyer;
     public AnimationCurve reflectionIntensityMultiplyer;
 
+    public static System.Action<int> eventAtTime;
+
+    private int _curHour = 0;
+
+    public static void OnTimeChanged(int time)
+    {
+        eventAtTime?.Invoke(time);
+    }
+
     private void Awake()
     {
         GameEvents.SaveInitiated += Save;
@@ -54,7 +63,12 @@ public class DayNightCycle : MonoBehaviour
         if (time >= 1.0f)
         {
             GameEvents.OnNewDay();
-            time = 0;
+            time = startTime;
+        }
+        else if (time > timeRate * (_curHour * 60))
+        {
+            _curHour++;
+            OnTimeChanged(_curHour);
         }
 
         sun.transform.eulerAngles = (time - 0.25f) * noon * 4.0f;
