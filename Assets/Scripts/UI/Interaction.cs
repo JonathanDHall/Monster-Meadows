@@ -17,7 +17,7 @@ public class Interaction : MonoBehaviour
         RaycastHit hit;
         if (Physics.SphereCast(transform.position, 0.1f, transform.TransformDirection(Vector3.forward), out hit, 3, _mask))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 3, Color.yellow);
+            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 3, Color.yellow);
             if (hit.transform.GetComponent<ItemObject>())
             {
                 _interactUI.SetActive(true);
@@ -26,6 +26,20 @@ public class Interaction : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     hit.transform.GetComponent<ItemObject>().OnHandlePickUpItem();
+                }
+            }
+
+            if (hit.transform.GetComponent<RootBridge>())
+            {
+                if (hit.transform.GetComponent<RootBridge>().curState == RootBridge.RootState.sprout)
+                {
+                    _interactUI.SetActive(true);
+                    EditText("Water");
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        hit.transform.GetComponent<RootBridge>().AttemptToWater();
+                    }
                 }
             }
 

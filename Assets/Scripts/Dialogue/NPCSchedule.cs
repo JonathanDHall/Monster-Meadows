@@ -23,6 +23,11 @@ public class NPCSchedule : MonoBehaviour
         _agent.SetDestination(place.transform.position);
     }
 
+    public void CreatePopUp(string message)
+    {
+        ChatPopUp.Create(GetComponent<NPCManager>().Name, message, GetComponent<NPCManager>()._popUpPlacement.transform);
+    }
+
     public void SendDebugMessage(string message)
     {
         Debug.Log(message);

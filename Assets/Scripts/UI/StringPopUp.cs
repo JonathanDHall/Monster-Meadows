@@ -43,6 +43,8 @@ public class StringPopUp : MonoBehaviour
         //mesh.sortingOrder = SortOrder;
 
         MoveVector = new Vector3(0.7f, 0.5f) * 2;
+
+        Destroy(gameObject, 10);
     }
 
     private void Update()

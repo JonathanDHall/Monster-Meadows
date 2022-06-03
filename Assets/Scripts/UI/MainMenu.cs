@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown _quality;
     [SerializeField] private Button _loadButton;
     [SerializeField] private GameObject _saveSuccesful;
+    [SerializeField] private Slider _textSpeed;
 
     private void Awake()
     {
@@ -24,6 +25,38 @@ public class MainMenu : MonoBehaviour
         {
             if (SaveSystem.SaveExists("Scene"))
                 _loadButton.interactable = true;
+        }
+    }
+
+    private void Start()
+    {
+        Gamemanager._instance.textSpeedMod = PlayerPrefs.GetFloat("_textSpeed");
+
+        if (_textSpeed != null)
+        {
+            switch (PlayerPrefs.GetFloat("_textSpeed"))
+            {
+                case 0.5f:
+                    _textSpeed.value = 1;
+                    break;
+                case 0.4f:
+                    _textSpeed.value = 2;
+                    break;
+                case 0.3f:
+                    _textSpeed.value = 3;
+                    break;
+                case 0.2f:
+                    _textSpeed.value = 4;
+                    break;
+                case 0.1f:
+                    _textSpeed.value = 5;
+                    break;
+                case 0.01f:
+                    _textSpeed.value = 6;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -96,5 +129,66 @@ public class MainMenu : MonoBehaviour
     {
         if (SaveSystem.SaveExists("Scene"))
             GameEvents.LoadInitiated();
+    }
+
+    public void EditName(string input)
+    {
+        Gamemanager._instance.Name = input;
+        PlayerPrefs.SetString("Name", input);
+    }
+
+    public void EditSubPronouns(string input)
+    {
+        Gamemanager._instance.SubPronouns = input; 
+        PlayerPrefs.SetString("SubPronouns", input);
+    }
+
+    public void EditObjPronouns(string input)
+    {
+        Gamemanager._instance.ObjPronouns = input;
+        PlayerPrefs.SetString("ObjPronouns", input);
+    }
+
+    public void EditPosPronouns(string input) 
+    { 
+        Gamemanager._instance.PosPronouns = input;
+        PlayerPrefs.SetString("PosPronouns", input);
+    }
+
+    public void EditRefPronouns(string input) 
+    {
+        Gamemanager._instance.RefPronouns = input;
+        PlayerPrefs.SetString("RefPronouns", input);
+    }
+
+    public void SetTextSpeed(float value)
+    {
+        switch (value)
+        {
+            case 1:
+                Gamemanager._instance.textSpeedMod = 0.5f;
+                PlayerPrefs.SetFloat("_textSpeed", 0.5f);
+                break;
+            case 2:
+                Gamemanager._instance.textSpeedMod = 0.4f;
+                PlayerPrefs.SetFloat("_textSpeed", 0.4f);
+                break;
+            case 3:
+                Gamemanager._instance.textSpeedMod = 0.3f;
+                PlayerPrefs.SetFloat("_textSpeed", 0.3f);
+                break;
+            case 4:
+                Gamemanager._instance.textSpeedMod = 0.2f;
+                PlayerPrefs.SetFloat("_textSpeed", 0.2f);
+                break;
+            case 5:
+                Gamemanager._instance.textSpeedMod = 0.1f;
+                PlayerPrefs.SetFloat("_textSpeed", 0.1f);
+                break;
+            case 6:
+                Gamemanager._instance.textSpeedMod = 0.01f;
+                PlayerPrefs.SetFloat("_textSpeed", 0.01f);
+                break;
+        }
     }
 }

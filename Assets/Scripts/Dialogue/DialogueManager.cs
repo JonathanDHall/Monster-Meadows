@@ -9,7 +9,7 @@ public class DialogueManager : MonoBehaviour
 	public Text dialogueText;
 	public Animator animator;
 	private Queue<string> sentences;
-	public float TextSpeed = 0.01f;
+	public float TextSpeed = 1f;
 	[SerializeField] private GameObject _continueButton;
 	[SerializeField] private GameObject _choices;
 	[SerializeField] private NPCManager _manager;
@@ -82,10 +82,12 @@ public class DialogueManager : MonoBehaviour
 	IEnumerator TypeSentence(string sentence)
 	{
 		dialogueText.text = "";
-		foreach (char letter in sentence.ToCharArray())
+		string NewSentences = Gamemanager._instance.SetPronouns(sentence);
+
+		foreach (char letter in NewSentences.ToCharArray())
 		{
 			dialogueText.text += letter;
-			yield return new WaitForSeconds(TextSpeed);
+			yield return new WaitForSeconds(TextSpeed * Gamemanager._instance.textSpeedMod);
 		}
 	}
 

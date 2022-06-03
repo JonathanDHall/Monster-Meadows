@@ -12,6 +12,8 @@ public class NPCManager : MonoBehaviour
     public HashSet<string> CharacterInfo { get; private set; } = new HashSet<string>();
     public int _relationshipLevel = 0;
 
+    [SerializeField] public GameObject _popUpPlacement;
+
     private void Awake()
     {
         GameEvents.SaveInitiated += Save;

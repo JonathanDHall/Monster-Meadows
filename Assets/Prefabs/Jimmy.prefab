@@ -421,6 +421,37 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914464258139085433}
   m_Enabled: 1
+--- !u!1 &961896140272753505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9092303894067058052}
+  m_Layer: 0
+  m_Name: PopUpPlacement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9092303894067058052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961896140272753505}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6304145696320833857}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1034474947454263693
 GameObject:
   m_ObjectHideFlags: 0
@@ -2569,6 +2600,7 @@ Transform:
   - {fileID: 49065518745097740}
   - {fileID: 4488158455754581123}
   - {fileID: 1759037082196448000}
+  - {fileID: 9092303894067058052}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2651,6 +2683,7 @@ MonoBehaviour:
   _interactUI: {fileID: 9180597965449552955}
   _name: Jimmy
   _relationshipLevel: 0
+  _popUpPlacement: {fileID: 961896140272753505}
 --- !u!135 &1967039813440136763
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2733,21 +2766,21 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 618944232533659303}
         m_TargetAssemblyTypeName: NPCSchedule, Assembly-CSharp
-        m_MethodName: SendDebugMessage
+        m_MethodName: CreatePopUp
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Nice Morning Isn't it?
+          m_StringArgument: (Name), your pronouns are (SubPronouns)/(ObjPronouns)
           m_BoolArgument: 0
         m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 618944232533659303}
         m_TargetAssemblyTypeName: NPCSchedule, Assembly-CSharp
-        m_MethodName: SendDebugMessage
+        m_MethodName: CreatePopUp
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
