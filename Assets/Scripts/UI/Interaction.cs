@@ -17,7 +17,6 @@ public class Interaction : MonoBehaviour
         RaycastHit hit;
         if (Physics.SphereCast(transform.position, 0.1f, transform.TransformDirection(Vector3.forward), out hit, 3, _mask))
         {
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 3, Color.yellow);
             if (hit.transform.GetComponent<ItemObject>())
             {
                 _interactUI.SetActive(true);

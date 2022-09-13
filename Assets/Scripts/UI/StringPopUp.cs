@@ -27,7 +27,6 @@ public class StringPopUp : MonoBehaviour
 
     public void SetUp(string text, bool IsCrit, float size = 0.1f)
     {
-        //transform.LookAt(transform.position - (GameManager._instance._player.transform.position - transform.position));
         transform.localScale = new Vector3(size, size, size);
 
         mesh.SetText(text);
@@ -40,7 +39,6 @@ public class StringPopUp : MonoBehaviour
         disappearTimer = DISAPPEAR_TIMER_MAX;
 
         SortOrder++;
-        //mesh.sortingOrder = SortOrder;
 
         MoveVector = new Vector3(0.7f, 0.5f) * 2;
 
@@ -49,8 +47,6 @@ public class StringPopUp : MonoBehaviour
 
     private void Update()
     {
-        //transform.LookAt(transform.position - (GameManager._instance._player.transform.position - transform.position));
-
         transform.position += MoveVector * Time.deltaTime;
         MoveVector -= MoveVector * 8 * Time.deltaTime;
 

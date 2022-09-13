@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
@@ -62,7 +61,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadLevl(string level)
     {
-        SceneManager.LoadScene(level);
+        Gamemanager._instance.LoadLevel(level);
     }
 
     public void OpenTab(GameObject tab)
@@ -122,7 +121,7 @@ public class MainMenu : MonoBehaviour
     {
         Collection._instance.Clear();
         SaveSystem.SeriouslyDeleteAllSaveFiles();
-        SceneManager.LoadScene(level);
+        Gamemanager._instance.LoadLevel(level);
     }
 
     public void Load()

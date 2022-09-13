@@ -26,18 +26,21 @@ public class RootBridge : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 3, Color.yellow);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * 100, Color.yellow);
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, 100, _mask))
         {
-            _hasSun = true;
-            States[curState]?.Invoke();
-        }
-        else
-        {
-            _hasSun = false;
-            States[curState]?.Invoke();
+            if (hit.transform.CompareTag("Sky"))
+            {
+                _hasSun = true;
+                States[curState]?.Invoke();
+            }
+            else
+            {
+                _hasSun = false;
+                States[curState]?.Invoke();
+            }
         }
     }
 
