@@ -42,6 +42,17 @@ public class Interaction : MonoBehaviour
                 }
             }
 
+            if (hit.transform.GetComponent<Door>())
+            {
+                _interactUI.SetActive(true);
+                EditText("Open");
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    hit.transform.GetComponent<Door>().LoadLevl();
+                }
+            }
+
             if (hit.transform.GetComponent<CropPlot>())
             {
                 var temp = hit.transform.GetComponent<CropPlot>();

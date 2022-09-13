@@ -15,11 +15,19 @@ public class DialogueManager : MonoBehaviour
 	[SerializeField] private NPCManager _manager;
 	private DialogueChoice[] dialogueChoices;
 
+	[SerializeField] private string _birthdayMessage;
+
 	void Start()
 	{
 		sentences = new Queue<string>();
 		if (_manager.CharacterInfo.Contains(_manager.Name))
 			nameText.text = _manager.Name;
+
+		if (Gamemanager._instance.isBirthday)
+        {
+			StopAllCoroutines();
+			StartCoroutine(TypeSentence(_birthdayMessage));
+		}
 	}
 
 	private void OnEnable()

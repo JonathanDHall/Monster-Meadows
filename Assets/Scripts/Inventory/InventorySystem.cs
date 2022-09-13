@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
@@ -15,6 +13,8 @@ public class InventorySystem : MonoBehaviour
     public System.Action onInventoryChangedEvent;
 
     [SerializeField] private GameObject _inventoryMenu;
+
+    public bool _isActive = false;
 
     [System.Serializable]
     public struct Item
@@ -74,6 +74,9 @@ public class InventorySystem : MonoBehaviour
 
     private void Update()
     {
+        if (!_isActive)
+            return;
+
         if (Input.GetKeyDown(KeyCode.I))
             _inventoryMenu.SetActive(!_inventoryMenu.activeInHierarchy);
     }

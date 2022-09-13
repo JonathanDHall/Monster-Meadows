@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,10 @@ public class Gamemanager : MonoBehaviour
     public string ObjPronouns = "Them";
     public string PosPronouns = "TheirS";
     public string RefPronouns = "Themselves";
+    public int BirthMonth = 1;
+    public int BirthDay = 1;
+
+    public bool isBirthday;
 
     public float textSpeedMod = 1;
 
@@ -39,6 +44,12 @@ public class Gamemanager : MonoBehaviour
         ObjPronouns = PlayerPrefs.GetString("ObjPronouns");
         PosPronouns = PlayerPrefs.GetString("PosPronouns");
         RefPronouns = PlayerPrefs.GetString("RefPronouns");
+
+        BirthMonth = PlayerPrefs.GetInt("BirthMonth");
+        BirthDay = PlayerPrefs.GetInt("BirthDay");
+
+        if (BirthMonth == DateTime.Today.Month && BirthDay == DateTime.Today.Day)
+            isBirthday = true;
     }
 
     //Will search through strings of text and replace certain phrases with saved strings such as names or pronouns.
@@ -93,6 +104,11 @@ public class Gamemanager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.2f);
+
+        if (FindObjectOfType<CharacterController>())
+            GetComponent<InventorySystem>()._isActive = true;
+        else 
+            GetComponent<InventorySystem>()._isActive = false;
 
         _loadingScreen.SetActive(false);
     }

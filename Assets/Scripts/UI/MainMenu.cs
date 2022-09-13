@@ -160,6 +160,18 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetString("RefPronouns", input);
     }
 
+    public void EditBirthMonth(int input)
+    {
+        Gamemanager._instance.BirthMonth = input;
+        PlayerPrefs.SetInt("BirthMonth", input);
+    }
+
+    public void EditBirthDay(int input)
+    {
+        Gamemanager._instance.BirthDay = input;
+        PlayerPrefs.SetInt("BirthDay", input);
+    }
+
     public void SetTextSpeed(float value)
     {
         switch (value)

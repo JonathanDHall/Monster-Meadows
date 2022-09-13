@@ -998,6 +998,7 @@ MonoBehaviour:
   _continueButton: {fileID: 1774352838965801738}
   _choices: {fileID: 1774352839706043250}
   _manager: {fileID: 6304145696320833861}
+  _birthdayMessage: 'Hiya (Name)! Happy birthday!!! '
 --- !u!1 &1774352839706043250
 GameObject:
   m_ObjectHideFlags: 0
