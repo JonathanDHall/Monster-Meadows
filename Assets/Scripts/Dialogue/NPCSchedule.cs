@@ -32,4 +32,9 @@ public class NPCSchedule : MonoBehaviour
     {
         Debug.Log(message);
     }
+
+    public void PauseMovement(bool _pause)
+    {
+        _agent.isStopped = _pause;
+    }
 }

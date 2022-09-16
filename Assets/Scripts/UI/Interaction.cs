@@ -45,7 +45,7 @@ public class Interaction : MonoBehaviour
             if (hit.transform.GetComponent<Door>())
             {
                 _interactUI.SetActive(true);
-                EditText("Open");
+                EditText("Enter");
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {

@@ -70,6 +70,14 @@ public class Gamemanager : MonoBehaviour
     [SerializeField] private GameObject _loadingScreen;
     [SerializeField] private Scrollbar _bar;
     float totalSceneProgress;
+    private Vector3 spawnTrans;
+    private Vector3 spawnRot;
+
+    public void SetSpawnPos(Vector3 trans, Vector3 rot)
+    {
+        spawnTrans = trans;
+        spawnRot = rot;
+    }
 
     //Used to initiate the loading of a new scene
     public void LoadLevel(string sceneName)
@@ -101,6 +109,13 @@ public class Gamemanager : MonoBehaviour
 
                 yield return null;
             }
+        }
+
+        if (spawnTrans != Vector3.zero)
+        {
+            var player = FindObjectOfType<PlayerController>().transform.gameObject;
+            player.transform.position = spawnTrans;
+            player.transform.eulerAngles = spawnRot;
         }
 
         yield return new WaitForSeconds(0.2f);

@@ -306,8 +306,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     sentences:
-    - I think Bob mentioned seeing it on a path up ahead. I think the path to the
-      left?
+    - I think Bob mentioned seeing in a nearby cave. He mentioned something about
+      huge vines.
     - Good luck finding it!
 --- !u!114 &3946469603418348592
 MonoBehaviour:
@@ -998,6 +998,7 @@ MonoBehaviour:
   _continueButton: {fileID: 1774352838965801738}
   _choices: {fileID: 1774352839706043250}
   _manager: {fileID: 6304145696320833861}
+  _agent: {fileID: 618944232533659303}
   _birthdayMessage: 'Hiya (Name)! Happy birthday!!! '
 --- !u!1 &1774352839706043250
 GameObject:

@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
 	[SerializeField] private GameObject _choices;
 	[SerializeField] private NPCManager _manager;
 	private DialogueChoice[] dialogueChoices;
-
+	[SerializeField] private NPCSchedule _agent;
 	[SerializeField] private string _birthdayMessage;
 
 	void Start()
@@ -32,6 +32,8 @@ public class DialogueManager : MonoBehaviour
 
 	private void OnEnable()
     {
+		_agent.PauseMovement(true);
+
 		if (_manager.CharacterInfo.Contains(_manager.Name))
 			nameText.text = _manager.Name;
 
@@ -47,15 +49,25 @@ public class DialogueManager : MonoBehaviour
 		{
 			item.gameObject.SetActive(true);
 		}
+
+		Invoke("LookAtPlayer", 0.4f);
 	}
 
-    private void OnDisable()
+	void LookAtPlayer()
+    {
+		_agent.transform.LookAt(PlayerController._instance.transform.position);
+	}
+
+	private void OnDisable()
     {
 		PlayerController._instance.EnableControls();
+		_agent.PauseMovement(false);
 	}
 
 	public void StartDialogue(Dialogue dialogue)
 	{
+		LookAtPlayer();
+
 		_continueButton.SetActive(true);
 		_choices.SetActive(false);
 
